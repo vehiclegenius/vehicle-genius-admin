@@ -3,10 +3,10 @@
 # Exit on first error
 set -e
 
-sudo supervisorctl stop vehicle-genius-admin
+sudo supervisorctl stop vehicle_genius_admin
 
 ./build.sh
 
-sudo supervisorctl reread vehicle-genius-admin
-sudo supervisorctl update vehicle-genius-admin
-sudo supervisorctl restart vehicle-genius-admin
+sudo supervisorctl reread
+sudo supervisorctl update vehicle_genius_admin
+sudo supervisorctl restart vehicle_genius_admin

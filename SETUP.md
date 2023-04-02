@@ -17,6 +17,8 @@ sudo apt-get update
 sudo apt-get install nginx
 sudo cp nginx.conf /etc/nginx/sites-available/vehicle-genius-admin
 sudo ln -s /etc/nginx/sites-available/vehicle-genius-admin /etc/nginx/sites-enabled
+sudo nginx -t
+sudo systemctl restart nginx
 ```
 
 ## Gunicorn
@@ -30,7 +32,7 @@ pip install gunicorn
 ```shell
 sudo apt-get update
 sudo apt-get install supervisor
-cp supervisorctl.conf /etc/supervisor/conf.d/vehicle-genius-admin.conf
+sudo cp supervisorctl.conf /etc/supervisor/conf.d/vehicle-genius-admin.conf
 ```
 
 ## Configuration
@@ -40,3 +42,9 @@ cp .env.example .env
 ```
 
 Configure as appropriate.
+
+## Admin access
+
+```shell
+python3 manage.py createsuperuser
+```
