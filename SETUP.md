@@ -21,10 +21,11 @@ sudo nginx -t
 sudo systemctl restart nginx
 ```
 
-## Gunicorn
+## Virtualenv
 
 ```shell
-pip install gunicorn
+pip3 install virtualenv
+virtualenv .pyenv
 ```
 
 ## supervisorctl
