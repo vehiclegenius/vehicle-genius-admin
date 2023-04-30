@@ -23,10 +23,24 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', '0') == '1'
 
 ALLOWED_HOSTS = [
-  'admin.test.vehiclegenius.site',
+    '127.0.0.1',
+    'localhost',
+    'admin.test.vehiclegenius.site',
+]
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
+
+CORS_ORIGIN_WHITELIST = [
+    'https://test.vehiclegenius.site',
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://test.vehiclegenius.site',
 ]
 
 
@@ -39,6 +53,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'tailwind',
+    'theme',
+    'django_browser_reload',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +66,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_browser_reload.middleware.BrowserReloadMiddleware',
 ]
 
 ROOT_URLCONF = 'vehicle_genius_admin.urls'
@@ -124,3 +142,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Tailwind app config
+
+TAILWIND_APP_NAME = 'theme'
+STATIC_ROOT = os.environ.get('STATIC_ROOT', BASE_DIR / 'static')
