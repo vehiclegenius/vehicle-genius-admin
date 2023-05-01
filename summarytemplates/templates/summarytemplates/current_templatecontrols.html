@@ -1,0 +1,28 @@
+<div class="flex flex-col gap-4 p-2" hx-target="this" hx-swap="outerHTML">
+  <div class="flex flex-row justify-end gap-4 w-full">
+    <button
+      class="blue-btn"
+      hx-post="/summarytemplates/validate/">
+      Validate & Preview
+    </button>
+    {% if validated and valid %}
+    <button class="blue-btn" hx-post="/summarytemplates/">
+      Save
+    </button>
+    {% endif %}
+    {% if not validated or not valid %}
+    <button class="blue-btn" disabled>
+      Save
+    </button>
+    {% endif %}
+  </div>
+
+  {% if preview and preview|length > 0 %}
+  <textarea class="w-full h-[500px] code" readonly aria-readonly="true">{{ preview }}</textarea>
+  {% endif %}
+  {% if validated and not valid %}
+  <div class="error-box">
+    <code class="text-sm">{{ error_message }}</code>
+  </div>
+  {% endif %}
+</div>
