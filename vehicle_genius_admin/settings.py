@@ -36,11 +36,11 @@ INTERNAL_IPS = [
 ]
 
 CORS_ORIGIN_WHITELIST = [
-    'https://test.vehiclegenius.site',
+    'https://admin.test.vehiclegenius.site',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://test.vehiclegenius.site',
+    'https://admin.test.vehiclegenius.site',
 ]
 
 
