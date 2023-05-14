@@ -61,8 +61,9 @@ def make_api_post_request(uri: str, body):
         os.environ.get('API_BASE_URL') + uri,
         data=json.dumps(body),
         headers=headers)
-    answer = json.loads(response.content.decode('utf-8'))
-    return answer
+    if response.content:
+        answer = json.loads(response.content.decode('utf-8'))
+        return answer
 
 
 def make_api_put_request(uri: str, body):

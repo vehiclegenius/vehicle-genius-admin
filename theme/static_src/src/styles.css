@@ -6,9 +6,15 @@
   @apply text-3xl;
 }
 
+.hollow-blue-btn {
+  @apply border border-blue-500 text-blue-500 font-bold py-2 px-4 rounded-full hover:bg-blue-500 hover:text-white cursor-pointer;
+}
 .blue-btn {
   @apply bg-blue-500 text-white font-bold py-2 px-4 rounded-full hover:bg-blue-400 cursor-pointer
     disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-auto;
+}
+.green-btn {
+  @apply bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-400 cursor-pointer;
 }
 
 input[type="text"],

@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block head %}
+  {% if resolved %}
+    <title>Resolved Prompt Feedback - Vehicle Genius</title>
+  {% else %}
+    <title>Unresolved Prompt Feedback - Vehicle Genius</title>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <div class="flex flex-col gap-4">
+    <div class="border-b-[1px] border-gray-200 pb-2 text-sm">
+      <ol class="flex flex-row gap-2">
+        <li class="text-gray-400">
+          <a href="/">Home</a>
+          <span class="ml-2 text-black">/</span>
+        </li>
+        <li class="text-gray-400">
+          <a href="/promptfeedbacks?state=unresolved">Prompt Feedback</a>
+          <span class="ml-2 text-black">/</span>
+        </li>
+        <li>
+          {% if resolved %}
+            Resolved
+          {% else %}
+            Unresolved
+          {% endif %}
+        </li>
+      </ol>
+    </div>
+
+    <h1 class="content-header">
+      {% if resolved %}
+        Prompt Feedbacks
+      {% else %}
+        Prompt Feedbacks
+      {% endif %}
+    </h1>
+
+    <div class="flex flex-row">
+      <div class="flex flex-row gap-2">
+        <a href="/promptfeedbacks?state=unresolved" class="{% if resolved %}hollow-blue-btn{% else %}blue-btn{% endif %}">Unresolved</a>
+        <a href="/promptfeedbacks?state=resolved" class="{% if not resolved %}hollow-blue-btn{% else %}blue-btn{% endif %}">Resolved</a>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-8">
+      {% for item in feedbacks %}
+        <div class="bg-blue">
+          <div class="flex flex-col gap-2 rounded bg-gray-100 p-2">
+            {% for message in item.messages %}
+              <div class="flex flex-col gap-2 bg-white shadow p-2">
+                <div class="text-gray-500">{{ message.role|capfirst }}</div>
+                <div class="text-gray-700">{{ message.content }}</div>
+              </div>
+            {% endfor %}
+            <div class="flex flex-row justify-between gap-2 pt-4">
+              <div class="flex flex-col gap-2 bg-white shadow p-2 w-full">
+                <div class="text-gray-600">Reason</div>
+                <div class="text-black">{{ item.reason }}</div>
+              </div>
+              {% if not resolved %}
+                <form>
+                  {% csrf_token %}
+                  <button class="green-btn" hx-post="/promptfeedbacks/{{ item.id }}/resolve" hx-target="closest form">Mark as resolved</button>
+                </form>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
+
