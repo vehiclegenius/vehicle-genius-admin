@@ -17,7 +17,11 @@ def current(request):
 
 def current_get(request):
     template = make_api_get_request('/admin/summary-templates/current')
-    return render(request, 'summarytemplates/current.html', {'template': template['template']})
+    return render(request, 'summarytemplates/current.html', {
+        'system_prompt': template['systemPrompt'],
+        'data_template': template['dataTemplate'],
+        'prompt_template': template['promptTemplate'],
+    })
 
 
 def current_post(request):
@@ -32,9 +36,11 @@ def current_post(request):
 def validate_and_preview_post(request):
     data = parse_request_post(request.POST)
     body = {
-        'template': data['template'],
+        'systemPrompt': data['systemPrompt'],
+        'dataTemplate': data['dataTemplate'],
+        'promptTemplate': data['promptTemplate'],
     }
-    answer = make_api_post_request("/admin/summary-templates/validate", body)
+    answer = make_api_post_request('/admin/summary-templates/validate', body)
     return render(request, 'summarytemplates/current_templatecontrols.html', {
         'validated': True,
         'valid': answer['isValid'],

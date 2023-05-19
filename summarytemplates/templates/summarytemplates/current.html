@@ -24,9 +24,31 @@
 
     <form class="flex flex-col gap-4" method="post" action="/summarytemplates/">
       {% csrf_token %}
-      <label class="w-full flex flex-col">
-        <span class="h-0">Template</span>
-        <textarea name="template" class="w-full h-[500px] code">{{ template }}</textarea>
+      <label class="w-full flex flex-col gap-2">
+        <span class="text-lg">System Instructions</span>
+        <span class="text-gray-600 text-sm">
+          Used to instruct ChatGPT how to behave.  Shorter descriptions
+          describing the general "role" of the bot, are more useful.  The
+          default of "You are a helpful assistant." is probably what ChatGPT
+          uses.
+        </span>
+        <input type="text" name="systemPrompt" class="w-full" value="{{ system_prompt }}" />
+      </label>
+      <label class="w-full flex flex-col gap-2">
+        <span class="text-lg">Data Template</span>
+        <span class="text-gray-600 text-sm">
+          The data used to inform the model about the vehicle.
+        </span>
+        <textarea name="dataTemplate" class="w-full h-[500px] code">{{ data_template }}</textarea>
+      </label>
+      <label class="w-full flex flex-col gap-2">
+        <span class="text-lg">Prompt Template</span>
+        <span class="text-gray-600 text-sm">
+          The overall prompt, <code>{Data}</code> indicates the result of the
+          data template, and <code>{UserMessage}</code> is the message from the
+          user.
+        </span>
+        <textarea name="promptTemplate" class="w-full h-[200px] code">{{ prompt_template }}</textarea>
       </label>
       {% include 'summarytemplates/current_templatecontrols.html' %}
     </form>
