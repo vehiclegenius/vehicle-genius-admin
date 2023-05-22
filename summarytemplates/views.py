@@ -25,10 +25,18 @@ def current_get(request):
 
 
 def current_post(request):
-    messages.success(request, 'Template saved successfully.')
     if request.headers.get('HX-Request') == 'true':
+        data = parse_request_post(request.POST)
+        body = {
+            'systemPrompt': data['systemPrompt'],
+            'dataTemplate': data['dataTemplate'],
+            'promptTemplate': data['promptTemplate'],
+        }
+        make_api_put_request('/admin/summary-templates/current', body)
+
         response = HttpResponse()
         response['HX-Redirect'] = '/summarytemplates'
+        messages.success(request, 'Template saved successfully.')
         return response
     return redirect('/summarytemplates')
 
