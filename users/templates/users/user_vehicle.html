@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block head %}
+  <title>User Vehicle {{ vehicle.vin }} - Vehicle Genius Admin</title>
+{% endblock %}
+
+{% block content %}
+  <h2 class="content-header mb-4">Graphs</h2>
+  <p>Average Market Value: {{ average_market_value }}</p>
+  <p>Annual Insurance Cost: {{ annual_insurance_cost }}</p>
+  <p>Annual Fuel Cost: {{ annual_fuel_cost }}</p>
+  <p>Annual Maintenance Cost: {{ annual_maintenance_cost }}</p>
+
+  <h2 class="content-header mb-4 mt-4">Vehicle Data</h2>
+  <pre>{{ vehicle }}</pre>
+{% endblock %}
