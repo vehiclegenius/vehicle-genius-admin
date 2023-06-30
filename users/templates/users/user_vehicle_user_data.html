@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block head %}
+  <title>User Vehicle User Data {{ vehicle.vin }} - Vehicle Genius Admin</title>
+{% endblock %}
+
+{% block content %}
+  <div class="flex flex-col justify-between gap-6 w-full">
+  <p>
+    <a class="link" href="{% url 'user_vehicle' vehicle_id=vehicle.id user=user %}">
+      Back to {{ vehicle.vin }}
+    </a>
+  </p>
+    <form method="post" action="{% url 'user_vehicle_user_data' vehicle_id=vehicle.id user=user %}" id="vehicle-user-data-form">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn blue-btn">Save</button>
+    </form>
+  </div>
+{% endblock %}

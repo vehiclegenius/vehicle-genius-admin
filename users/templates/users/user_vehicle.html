@@ -11,6 +11,12 @@
   <p>Annual Fuel Cost: {{ annual_fuel_cost }}</p>
   <p>Annual Maintenance Cost: {{ annual_maintenance_cost }}</p>
 
+  <h2 class="content-header mb-4 mt-4">Vehicle User Data</h2>
+  <pre>{{ vehicle_user_data }}</pre>
+  <p>
+    <a class="link" href="/users/{{ user }}/{{ vehicle_id }}/user_data">Edit</a>
+  </p>
+
   <h2 class="content-header mb-4 mt-4">Vehicle Data</h2>
   <pre>{{ vehicle }}</pre>
 {% endblock %}
