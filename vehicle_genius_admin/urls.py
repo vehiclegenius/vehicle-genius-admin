@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from . import views
 
 urlpatterns = [
+    path('', views.redirect_to_summarytemplates, name='redirect_to_summarytemplates'),
     path('summarytemplates/', include('summarytemplates.urls')),
     path('promptfeedbacks/', include('promptfeedbacks.urls')),
     path('users/', include('users.urls')),
