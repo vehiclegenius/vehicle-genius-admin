@@ -83,6 +83,6 @@ def null_conditional(obj, attr_string, default=None):
 
 
 def avg(arr):
-    if len(arr) == 0 or arr is None:
+    if arr is None or len(arr) == 0:
         return 0
     return sum(arr) / len(arr)
